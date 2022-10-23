@@ -4,7 +4,7 @@ using ScooterRental.Core.Services;
 
 namespace ScooterRental.Controllers
 {
-    [Route("api")]
+    [Route("api-scooter")]
     [ApiController]
     public class ScooterController : ControllerBase
     {
@@ -15,7 +15,6 @@ namespace ScooterRental.Controllers
             _scooterService = scooterService;
         }
 
-        [Route("scooter")]
         [HttpPost]
         public IActionResult AddScooter(Scooter scooter)
         {
@@ -30,7 +29,7 @@ namespace ScooterRental.Controllers
             return Ok();
         }
 
-        [Route("scooter/{id}")]
+        [Route("{id}")]
         [HttpGet]
         public IActionResult GetScooter(string id)
         {
@@ -44,7 +43,7 @@ namespace ScooterRental.Controllers
             return Ok(scooter);
         }
 
-        [Route("scooter/all-available")]
+        [Route("all-available")]
         [HttpGet]
         public IActionResult GetAllAvailableScooters()
         {
@@ -53,7 +52,7 @@ namespace ScooterRental.Controllers
             return Ok(scooters);
         }
 
-        [Route("scooter/all")]
+        [Route("all")]
         [HttpGet]
         public IActionResult GetAllScooters()
         {
@@ -62,7 +61,7 @@ namespace ScooterRental.Controllers
             return Ok(scooters);
         }
 
-        [Route("scooter/{id}")]
+        [Route("{id}")]
         [HttpDelete]
         public IActionResult DeleteScooter(string id)
         {

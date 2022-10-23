@@ -5,10 +5,11 @@
         public string Id { get; set; }
         public decimal PricePerMinute { get; set; }
 
-        //public Entity(string id)
-        //{
-        //    Id = id;
-        //}
+        protected Entity(string id, decimal pricePerMinute)
+        {
+            Id = id;
+            PricePerMinute = pricePerMinute;
+        }
 
     }
 }

@@ -48,6 +48,7 @@ namespace ScooterRental
             services.AddScoped<IEntityService<Scooter>, EntityService<Scooter>>();
             services.AddScoped<IEntityService<RentedScooter>, EntityService<RentedScooter>>();
             services.AddScoped<IScooterService, ScooterService>();
+            services.AddScoped<IRentedScooterService, RentedScooterService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

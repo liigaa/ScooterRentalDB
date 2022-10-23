@@ -7,5 +7,6 @@ namespace ScooterRental.Core.Services
     {
         bool ScooterExists(string id);
         List<Scooter> GetAvailableScooters();
+        void UpdateScooterAvailability(Scooter scooter);
     }
 }

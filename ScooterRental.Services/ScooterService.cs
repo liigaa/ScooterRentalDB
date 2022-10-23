@@ -21,5 +21,12 @@ namespace ScooterRental.Services
         {
             return _context.Scooters.Where(scooter => scooter.IsRented == false).ToList();
         }
+
+        public void UpdateScooterAvailability(Scooter scooter)
+        {
+            scooter.IsRented = true;
+
+            Update(scooter);
+        }
     }
 }
