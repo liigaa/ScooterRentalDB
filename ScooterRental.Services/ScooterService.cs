@@ -22,9 +22,26 @@ namespace ScooterRental.Services
             return _context.Scooters.Where(scooter => scooter.IsRented == false).ToList();
         }
 
-        public void UpdateScooterAvailability(Scooter scooter)
+        public Scooter GetAvailableScooterById(string id)
+        {
+            return _context.Scooters.FirstOrDefault(scooter => scooter.Id == id && scooter.IsRented == false);
+        }
+
+        public Scooter GetRentedScooterById(string id)
+        {
+            return _context.Scooters.FirstOrDefault(scooter => scooter.Id == id && scooter.IsRented == true);
+        }
+
+        public void UpdateScooterIsRentedToTrue(Scooter scooter)
         {
             scooter.IsRented = true;
+
+            Update(scooter);
+        }
+
+        public void UpdateScooterIsRentedToFalse(Scooter scooter)
+        {
+            scooter.IsRented = false;
 
             Update(scooter);
         }

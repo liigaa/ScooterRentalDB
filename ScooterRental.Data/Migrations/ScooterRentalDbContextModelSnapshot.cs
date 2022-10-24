@@ -21,11 +21,16 @@ namespace ScooterRental.Data.Migrations
 
             modelBuilder.Entity("ScooterRental.Core.Models.RentedScooter", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("PKey")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime?>("EndTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("PricePerMinute")
                         .HasColumnType("decimal(18,2)");
@@ -36,15 +41,20 @@ namespace ScooterRental.Data.Migrations
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("Id");
+                    b.HasKey("PKey");
 
                     b.ToTable("RentedScooters");
                 });
 
             modelBuilder.Entity("ScooterRental.Core.Models.Scooter", b =>
                 {
+                    b.Property<int>("PKey")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsRented")
                         .HasColumnType("bit");
@@ -52,7 +62,7 @@ namespace ScooterRental.Data.Migrations
                     b.Property<decimal>("PricePerMinute")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("Id");
+                    b.HasKey("PKey");
 
                     b.ToTable("Scooters");
                 });

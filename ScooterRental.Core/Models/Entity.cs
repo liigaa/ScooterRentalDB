@@ -1,7 +1,13 @@
-﻿namespace ScooterRental.Core.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+
+namespace ScooterRental.Core.Models
 {
     public abstract class Entity
     {
+        [Key]
+        [JsonIgnore]
+        public int PKey { get; set; }
         public string Id { get; set; }
         public decimal PricePerMinute { get; set; }
 
@@ -11,5 +17,8 @@
             PricePerMinute = pricePerMinute;
         }
 
+        protected Entity()
+        {
+        }
     }
 }

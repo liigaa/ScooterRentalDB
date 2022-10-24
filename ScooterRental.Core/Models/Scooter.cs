@@ -1,12 +1,10 @@
-﻿namespace ScooterRental.Core.Models
+﻿using System.Text.Json.Serialization;
+
+namespace ScooterRental.Core.Models
 {
     public class Scooter : Entity
     {
+        [JsonIgnore]
         public bool IsRented { get; set; }
-
-        public Scooter(string id, decimal pricePerMinute) : base(id, pricePerMinute)
-        {
-            IsRented = false;
-        }
     }
 }

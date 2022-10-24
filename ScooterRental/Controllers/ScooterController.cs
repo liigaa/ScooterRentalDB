@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using ScooterRental.Core.Models;
 using ScooterRental.Core.Services;
+using ScooterRental.Core.Validations;
 
 namespace ScooterRental.Controllers
 {
@@ -9,10 +12,13 @@ namespace ScooterRental.Controllers
     public class ScooterController : ControllerBase
     {
         private readonly IScooterService _scooterService;
+        private readonly IEnumerable<IScooterValidator> _scooterValidators;
 
-        public ScooterController(IScooterService scooterService)
+        public ScooterController(IScooterService scooterService,
+            IEnumerable<IScooterValidator> scooterValidators)
         {
             _scooterService = scooterService;
+            _scooterValidators = scooterValidators;
         }
 
         [HttpPost]
@@ -20,10 +26,12 @@ namespace ScooterRental.Controllers
         {
             var exists = _scooterService.ScooterExists(scooter.Id);
 
-            if (exists)
+            if (!_scooterValidators.All(s => s.IsValid(scooter)) || 
+                exists)
             {
                 return BadRequest();
             }
+
             _scooterService.Create(scooter);
 
             return Ok();
@@ -33,6 +41,10 @@ namespace ScooterRental.Controllers
         [HttpGet]
         public IActionResult GetScooter(string id)
         {
+            if (string.IsNullOrEmpty(id))
+            {
+                return BadRequest();
+            }
             var scooter = _scooterService.GetById(id);
 
             if (scooter == null)
@@ -65,11 +77,21 @@ namespace ScooterRental.Controllers
         [HttpDelete]
         public IActionResult DeleteScooter(string id)
         {
+            if (string.IsNullOrEmpty(id))
+            {
+                return BadRequest();
+            }
+
             var scooter = _scooterService.GetById(id);
 
             if (scooter == null)
             {
                 return NotFound();
+            }
+
+            if (scooter.IsRented)
+            {
+                return BadRequest();
             }
 
             _scooterService.Delete(scooter);

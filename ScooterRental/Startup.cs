@@ -13,8 +13,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ScooterRental.Core;
 using ScooterRental.Core.Models;
 using ScooterRental.Core.Services;
+using ScooterRental.Core.Validations;
 using ScooterRental.Services;
 
 namespace ScooterRental
@@ -49,6 +51,9 @@ namespace ScooterRental
             services.AddScoped<IEntityService<RentedScooter>, EntityService<RentedScooter>>();
             services.AddScoped<IScooterService, ScooterService>();
             services.AddScoped<IRentedScooterService, RentedScooterService>();
+            services.AddScoped<IScooterValidator, IdValidator>();
+            services.AddScoped<IScooterValidator, PricePerMinuteValidator>();
+            services.AddScoped<IIncomeCalculation, IncomeCalculation>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
