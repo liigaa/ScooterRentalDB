@@ -11,15 +11,12 @@ namespace ScooterRental.Controllers
     {
         private readonly IRentedScooterService _rentedScooterService;
         private readonly IScooterService _scooterService;
-        private readonly IIncomeCalculation _calculation;
 
         public RentScooterController(IRentedScooterService rentedScooterService,
-            IScooterService scooterService,
-            IIncomeCalculation calculation)
+            IScooterService scooterService)
         {
             _rentedScooterService = rentedScooterService;
             _scooterService = scooterService;
-            _calculation = calculation;
         }
 
         [Route("start-rent/{id}")]
@@ -37,8 +34,7 @@ namespace ScooterRental.Controllers
             {
                 return NotFound();
             }
-
-            _scooterService.UpdateScooterIsRentedToTrue(scooter);
+            
             _rentedScooterService.StartRent(scooter);
 
             return Ok();
@@ -63,10 +59,7 @@ namespace ScooterRental.Controllers
 
             _scooterService.UpdateScooterIsRentedToFalse(scooter);
 
-            rentedScooter.EndTime = DateTime.UtcNow;
-            var totalPrice = _calculation.GetRentedScooterFee(rentedScooter);
-            rentedScooter.TotalPrice = totalPrice;
-            _rentedScooterService.Update(rentedScooter);
+           _rentedScooterService.EndRent(rentedScooter);
 
             return Ok();
         }
