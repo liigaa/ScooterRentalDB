@@ -53,7 +53,7 @@ namespace ScooterRental
             services.AddScoped<IRentedScooterService, RentedScooterService>();
             services.AddScoped<IScooterValidator, IdValidator>();
             services.AddScoped<IScooterValidator, PricePerMinuteValidator>();
-            services.AddScoped<IIncomeCalculation, IncomeCalculation>();
+            services.AddScoped<IRentCalculation, RentCalculation>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -10,11 +10,11 @@ namespace ScooterRental.Services
 {
     public class RentedScooterService : EntityService<RentedScooter>, IRentedScooterService
     {
-        private readonly IIncomeCalculation _calculation;
+        private readonly IRentCalculation _calculation;
         private readonly IScooterService _scooter;
         public RentedScooterService(IScooterRentalDbContext context) : base(context)
         {
-            _calculation = new IncomeCalculation();
+            _calculation = new RentCalculation();
             _scooter = new ScooterService(context);
         }
         
