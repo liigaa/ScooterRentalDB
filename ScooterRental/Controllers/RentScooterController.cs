@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
-using ScooterRental.Core;
+﻿using Microsoft.AspNetCore.Mvc;
 using ScooterRental.Core.Services;
 
 namespace ScooterRental.Controllers

@@ -23,11 +23,21 @@ namespace ScooterRental.Controllers
             return Ok(result);
         }
 
-        [Route("all-unfinished")]
+        [Route("all-income/{year}")]
         [HttpGet]
-        public IActionResult GetAllUnFinishedRentIncome()
+        public IActionResult GetAllRentIncomeByYear(int year)
         {
-            var result = _rentedScooterService.GetNotFinishedRentalIncome(null);
+            var result = _rentedScooterService.GetNotFinishedRentalIncome(year) 
+                         + _rentedScooterService.GetAllFinishedRentalIncomeByYear(year);
+
+            return Ok(result);
+        }
+
+        [Route("all-finished/{year}")]
+        [HttpGet]
+        public IActionResult GetAllFinishedRentIncomeByYear(int year)
+        {
+            var result = _rentedScooterService.GetAllFinishedRentalIncomeByYear(year);
 
             return Ok(result);
         }

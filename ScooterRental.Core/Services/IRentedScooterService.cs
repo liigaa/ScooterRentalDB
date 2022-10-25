@@ -9,5 +9,6 @@ namespace ScooterRental.Core.Services
         RentedScooter GetRentedScooter(string id);
         decimal GetAllFinishedRentedSum();
         decimal GetNotFinishedRentalIncome(int? year);
+        decimal GetAllFinishedRentalIncomeByYear(int year);
     }
 }

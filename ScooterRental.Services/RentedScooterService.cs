@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using ScooterRental.Core;
@@ -42,6 +41,12 @@ namespace ScooterRental.Services
         public decimal GetAllFinishedRentedSum()
         {
             return _context.RentedScooters.Where(scooter => scooter.EndTime.HasValue)
+                .Sum(scooter => scooter.TotalPrice);
+        }
+
+        public decimal GetAllFinishedRentalIncomeByYear(int year)
+        {
+            return _context.RentedScooters.Where(y => y.EndTime.HasValue && y.EndTime.Value.Year == year)
                 .Sum(scooter => scooter.TotalPrice);
         }
 
