@@ -41,35 +41,35 @@ namespace ScooterRental.Tests
             result.Should().Be(0);
         }
 
-        [TestMethod]
-        public void GetNotFinishedRentalIncome_IfYearSameAsDateTimeNowYear_ReturnZero()
-        {
-            // Arrange
-            var year = DateTime.UtcNow.Year;
+        //[TestMethod]
+        //public void GetNotFinishedRentalIncome_IfYearSameAsDateTimeNowYear_ReturnZero()
+        //{
+        //    // Arrange
+        //    var year = DateTime.UtcNow.Year;
 
-            _moq.Setup(c => c.RentedScooters).Returns(List<RentedScooter>());
+        //    _moq.Setup(c => c.RentedScooters).Returns(List<RentedScooter>());
 
-            // Act
-            var result = _service.GetNotFinishedRentalIncome(year);
+        //    // Act
+        //    var result = _service.GetNotFinishedRentalIncome(year);
 
-            // Assert
-            result.Should().Be(0);
-        }
+        //    // Assert
+        //    result.Should().Be(0);
+        //}
 
-        private DbSet<RentedScooter> List<T>() where T : class
-        {
-            return _moq.Object.RentedScooters;
-        }
+        //private DbSet<RentedScooter> List<T>() where T : class
+        //{
+        //    return _moq.Object.RentedScooters;
+        //}
 
 
-        public IList<RentedScooter> GetRentedScooters()
-        {
-            return new List<RentedScooter>
-            {
-                new RentedScooter("1", DateTime.UtcNow.AddMinutes(-10), DateTime.UtcNow, 0.2m),
-                new RentedScooter("2", DateTime.UtcNow.AddMinutes(-5),  0.2m),
-                new RentedScooter("3", DateTime.UtcNow.AddMinutes(-10),  0.2m),
-            };
-        }
+        //public IList<RentedScooter> GetRentedScooters()
+        //{
+        //    return new List<RentedScooter>
+        //    {
+        //        new RentedScooter("1", DateTime.UtcNow.AddMinutes(-10), DateTime.UtcNow, 0.2m),
+        //        new RentedScooter("2", DateTime.UtcNow.AddMinutes(-5),  0.2m),
+        //        new RentedScooter("3", DateTime.UtcNow.AddMinutes(-10),  0.2m),
+        //    };
+        //}
     }
 }
